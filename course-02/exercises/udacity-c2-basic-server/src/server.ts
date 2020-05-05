@@ -105,11 +105,11 @@ import { Car, cars as cars_list } from './cars';
 
       return res.status(200)
                 .send(car);
-  } );
+  } );  
 
   /// @TODO Add an endpoint to post a new car to our list
   // it should require id, type, model, and cost
-  app.post( "/cars/", 
+  app.post( "/cars/",
     async ( req: Request, res: Response ) => {
 
       let { make, id, type, model, cost } = req.body;
