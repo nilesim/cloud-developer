@@ -1,12 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
-import validator from 'validator';
 
 (async () => {
 
   // Init the Express application
   const app = express();
+  const validator = require('validator');
   // Set the network port
   const port = process.env.PORT || 8082;
   
