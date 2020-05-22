@@ -18,6 +18,19 @@ router.get('/', async (req: Request, res: Response) => {
 
 //@TODO
 //Add an endpoint to GET a specific resource by Primary Key
+// Get all feed items
+// router.get('/:id', async (req: Request, res: Response) => {
+//     const items = await FeedItem.findByPk(: Number)
+    
+    
+//     findAndCountAll({order: [['id', 'DESC']]});
+//     items.rows.map((item) => {
+//             if(item.url) {
+//                 item.url = AWS.getGetSignedUrl(item.url);
+//             }
+//     });
+//     res.send(items);
+// });
 
 // update a specific resource
 router.patch('/:id', 
