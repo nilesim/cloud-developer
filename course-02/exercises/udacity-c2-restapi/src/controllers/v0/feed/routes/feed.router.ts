@@ -16,11 +16,13 @@ router.get('/', async (req: Request, res: Response) => {
     res.send(items);
 });
 
-//@TODO
-//Add an endpoint to GET a specific resource by Primary Key
-// Get all feed items
-// router.get('/:id', async (req: Request, res: Response) => {
-//     const items = await FeedItem.findByPk(: Number)
+// Get a specific resource
+router.get('/:id', 
+    async (req: Request, res: Response) => {
+        let { id } = req.params;
+        const item = await FeedItem.findByPk(id);
+        res.send(item);
+    });
     
     
 //     findAndCountAll({order: [['id', 'DESC']]});
