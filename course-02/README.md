@@ -120,7 +120,7 @@ kubectl apply -f .\backend-user-service.yaml
 kubectl port-forward service/frontend 8100:8100
 
 kubectl port-forward service/reverseproxy 8080:8080
-# test it 
+### test it 
 curl http://localhost:8080/api/v0/feed
 
 -- chrome screenshot can be found at: https://github.com/nilesim/cloud-developer/blob/dev/course-02/project/refactor-udagram-screenshots/alive-website.PNG
