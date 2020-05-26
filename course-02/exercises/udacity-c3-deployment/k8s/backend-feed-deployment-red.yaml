@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     service: backend-feed-red
-  name: backend-feed
+  name: backend-feed-red
 spec:
   replicas: 1
   strategy:
@@ -21,7 +21,7 @@ spec:
         color: red
     spec:
       containers:
-      - image: nilesim/udacity-restapi-feed:v2
+      - image: nilesim/udacity-restapi-feed:latest
         name: backend-feed
         imagePullPolicy: Always  
         resources:
