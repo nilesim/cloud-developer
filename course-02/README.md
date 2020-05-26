@@ -148,3 +148,17 @@ curl http://localhost:8080/api/v0/feed
 kubectl get deployments
 
 kubectl set image deployments/backend-feed backend-feed=nilesim/udacity-restapi-feed:dev
+
+## 8 - a/b testing
+kubectl apply -f backend-feed-deployment-green.yaml 
+
+kubectl apply -f backend-feed-deployment-red.yaml 
+
+kubectl apply -f backend-feed-service-red.yaml
+
+kubectl apply -f backend-feed-service-green.yaml
+
+
+kubectl port-forward service/frontend 8100:8100
+
+kubectl port-forward service/reverseproxy 8080:8080
