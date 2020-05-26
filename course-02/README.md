@@ -11,17 +11,17 @@ https://github.com/nilesim/cloud-developer/tree/dev/course-02/project/refactor-u
 ## DockerHub images could be found at: 
 https://hub.docker.com/u/nilesim
 
-* CI-CD file for travis
+* CI-CD file for travis:
 https://github.com/nilesim/cloud-developer/blob/master/.travis.yml
-* “user” - allows users to register and log into a web client, 
+* “user” - allows users to register and log into a web client:
 https://github.com/nilesim/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi-user
-* “feed” - allows users to post photos, and process photos using image filtering 
+* “feed” - allows users to post photos, and process photos using image filtering:
 https://github.com/nilesim/cloud-developer/tree/master/course-02/exercises/udacity-c2-restapi-feed
-* “frontend” - acts as an interface between the user and the backend-services
+* “frontend” - acts as an interface between the user and the backend-services:
 https://github.com/nilesim/cloud-developer/tree/master/course-02/exercises/udacity-c2-frontend
-* docker compose build files for building all with ngnix
+* docker compose build files for building all with ngnix:
 https://github.com/nilesim/cloud-developer/tree/master/course-02/exercises/udacity-c3-deployment/docker
-* k8 files for kubernetes
+* k8 files for kubernetes:
 https://github.com/nilesim/cloud-developer/tree/master/course-02/exercises/udacity-c3-deployment/k8s
 
 
@@ -51,11 +51,15 @@ docker images
 docker run --rm --publish 8080:8080 -v $HOME/.aws:/root/.aws --env POSTGRESS_HOST=$POSTGRESS_HOST --env POSTGRESS_USERNAME=$POSTGRESS_USERNAME --env POSTGRESS_PASSWORD=$POSTGRESS_PASSWORD --env POSTGRESS_DB=$POSTGRESS_DB --env AWS_REGION=$AWS_REGION --env AWS_PROFILE=$AWS_PROFILE --env AWS_BUCKET=$AWS_BUCKET --env JWT_SECRET=$JWT_SECRET --name feed nilesim/udacity-restapi-feed
 
 docker exec -it feed /bin/bash
+
 curl http://localhost:8080/api/v0/feed
+
 docker push nilesim/udacity-restapi-feed
 ### List, kill and clean
 docker container ls
+
 docker container kill feed
+
 docker container prune
 
 ## 2 - DockerFiles build all together 
@@ -116,12 +120,18 @@ kubectl apply -f .\backend-user-service.yaml
 kubectl port-forward service/frontend 8100:8100
 
 kubectl port-forward service/reverseproxy 8080:8080
-# test it - chrome screenshot can be found at: https://github.com/nilesim/cloud-developer/blob/dev/course-02/project/refactor-udagram-screenshots/alive-website.PNG
+# test it 
 curl http://localhost:8080/api/v0/feed
 
-# 6 - Scale up and down
+-- chrome screenshot can be found at: https://github.com/nilesim/cloud-developer/blob/dev/course-02/project/refactor-udagram-screenshots/alive-website.PNG
+
+## 6 - Scale up and down
  kubectl scale deployment/backend-user --replicas=10
+ 
  kubectl scale deployment/backend-feed --replicas=5
+ 
  kubectl get deploy
+ 
  kubectl scale deployment/backend-user --replicas=1
+ 
  kubectl scale deployment/backend-feed --replicas=1
