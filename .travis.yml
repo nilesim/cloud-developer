@@ -15,9 +15,9 @@ install:
   - echo 'Docker compose build'
   - docker-compose -f course-02/exercises/udacity-c3-deployment/docker/docker-compose-build.yaml build
   - echo 'Docker push '
-  - docker push nilesim/udagram-user
-  - docker push nilesim/udagram-feed
-  - docker push nilesim/udagram-frontend
+  - docker push nilesim/udacity-restapi-user
+  - docker push nilesim/udacity-restapi-feed
+  - docker push nilesim/udacity-frontend
   - docker push nilesim/reverseproxy
   - echo 'kubectl start'
   - kubectl apply -f course-02/exercises/udacity-c3-deployment/k8s/backend-feed-service.yaml --record
