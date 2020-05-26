@@ -135,3 +135,7 @@ curl http://localhost:8080/api/v0/feed
  kubectl scale deployment/backend-user --replicas=1
  
  kubectl scale deployment/backend-feed --replicas=1
+
+## 7 - zero downtime update example
+kubectl get deployments
+kubectl set image deployments/backend-feed backend-feed=nilesim/udacity-restapi-feed:dev
