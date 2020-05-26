@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+data:
+ AWS_MEDIA_BUCKET: udagram-selin-dev
+ AWS_PROFILE: default
+ AWS_REGION: us-east-2
+ JWT_SECRET: helloworld
+ POSTGRESS_DB: udagramselindev
+ POSTGRESS_HOST: udagramselindev.cbokukz9elyj.us-east-2.rds.amazonaws.com
+ URL: http://localhost:8100
+metadata:
+  name: env-config
