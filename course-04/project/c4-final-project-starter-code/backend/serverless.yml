@@ -216,28 +216,30 @@ resources:
         RestApiId:
           Ref: ApiGatewayRestApi
 
-    TodoDynamoDBTable:
-      Type: "AWS::DynamoDB::Table"
+    TodosDynamoDBTable:
+      Type: AWS::DynamoDB::Table
       Properties:
         AttributeDefinitions:
-          - AttributeName: todoId
-            AttributeType: S
           - AttributeName: userId
+            AttributeType: S
+          - AttributeName: createdAt
+            AttributeType: S
+          - AttributeName: todoId
             AttributeType: S
         KeySchema:
-          - AttributeName: todoId
-            KeyType: HASH
           - AttributeName: userId
+            KeyType: HASH
+          - AttributeName: todoId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.TODO_TABLE}
         GlobalSecondaryIndexes:
           - IndexName: ${self:provider.environment.TODO_USER_ID_INDEX}
             KeySchema:
-            - AttributeName: userId
-              KeyType: HASH
-            - AttributeName: todoId
-              KeyType: RANGE
+              - AttributeName: todoId
+                KeyType: HASH
+              - AttributeName: createdAt
+                KeyType: RANGE
             Projection:
               ProjectionType: ALL
 
@@ -268,7 +270,7 @@ resources:
           Statement:
             - Sid: PublicReadForGetBucketObjects
               Effect: Allow
-              Principal: "*"
-              Action: "s3:GetObject"
-              Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
+              Principal: '*'
+              Action: 's3:GetObject'
+              Resource: 'arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*'
         Bucket: !Ref AttachmentsBucket

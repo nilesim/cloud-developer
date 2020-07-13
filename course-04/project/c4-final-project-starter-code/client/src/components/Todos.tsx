@@ -51,10 +51,12 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
         name: this.state.newTodoName,
         dueDate
       })
+      console.log('Todo created')
       this.setState({
         todos: [...this.state.todos, newTodo],
         newTodoName: ''
       })
+      console.log('New box initilized')
     } catch {
       alert('Todo creation failed')
     }
