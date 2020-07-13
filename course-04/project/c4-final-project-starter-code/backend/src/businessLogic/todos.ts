@@ -4,7 +4,7 @@ import { TodoItem } from "../models/TodoItem";
 import { TodoUpdate } from "../models/TodoUpdate";
 import { TodoAccess } from "../dataLayer/todoAccess";
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { getUserId } from "../auth/utils.ts";
+import { getUserId } from "../auth/utils";
 import { UpdateTodoRequest } from "../requests/UpdateTodoRequest";
 import * as AWS  from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'

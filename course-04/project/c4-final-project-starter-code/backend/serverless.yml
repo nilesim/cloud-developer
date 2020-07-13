@@ -1,5 +1,5 @@
 service:
-  name: serverless-celines-todo-app
+  name: serverless-celines
 
 plugins:
   - serverless-webpack
@@ -19,9 +19,8 @@ provider:
     apiGateway: true
 
   environment:
-    TODO_TABLE: Todo-${self:provider.stage}
+    TODO_TABLE: Todos-${self:provider.stage}
     TODO_USER_ID_INDEX: TodoUserIdIndex
-    TODO_S3_BUCKET: ${self:service.name}-todos-${self:provider.stage}
     IMAGES_S3_BUCKET: serverless-todo-celine-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     JWKS_URL: https://dev-ff5lun80.us.auth0.com/.well-known/jwks.json
@@ -218,29 +217,27 @@ resources:
           Ref: ApiGatewayRestApi
 
     TodoDynamoDBTable:
-      Type: AWS::DynamoDB::Table
+      Type: "AWS::DynamoDB::Table"
       Properties:
         AttributeDefinitions:
-          - AttributeName: userId
-            AttributeType: S
-          - AttributeName: createdAt
-            AttributeType: S
           - AttributeName: todoId
+            AttributeType: S
+          - AttributeName: userId
             AttributeType: S
         KeySchema:
-          - AttributeName: userId
-            KeyType: HASH
           - AttributeName: todoId
+            KeyType: HASH
+          - AttributeName: userId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.TODO_TABLE}
         GlobalSecondaryIndexes:
           - IndexName: ${self:provider.environment.TODO_USER_ID_INDEX}
             KeySchema:
-              - AttributeName: todoId
-                KeyType: HASH
-              - AttributeName: createdAt
-                KeyType: RANGE
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: todoId
+              KeyType: RANGE
             Projection:
               ProjectionType: ALL
 
@@ -273,5 +270,5 @@ resources:
               Effect: Allow
               Principal: "*"
               Action: "s3:GetObject"
-              Resource: "arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*"
+              Resource: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*
         Bucket: !Ref AttachmentsBucket
