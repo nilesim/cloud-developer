@@ -9,14 +9,20 @@ const logger = createLogger('List todos');
 
 export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   logger.info('Listing todo items ',event)
-  const todos = await getTodos(event);
-  logger.info('Todo items: ', todos)
-  return {
-    statusCode: 200,
-    body: JSON.stringify({
-      items: todos
-    })
-  };
+  try {
+    const todos = await getTodos(event);
+    logger.info('Todo items: ', todos)
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        items: todos
+      })
+    };
+  } catch (error) {
+    if(error.statusCode == 403) {
+      console.error('The item does not has image yet.')
+    }
+  }
 });
 
 handler.use(
