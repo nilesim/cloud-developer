@@ -4,7 +4,6 @@ metadata:
   name: backend-feed-red
 spec:
   selector:
-    app: backend-feed
     color: red
     service: backend-feed
   ports:
